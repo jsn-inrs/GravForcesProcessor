@@ -1,28 +1,28 @@
 # Project : GravForcesProcessor
-OpenSim is a great software for biomechanical simulation, and it's Python API helps graetly for quick prototyping of scientific applications. However, this Python wrapping doesn't include all the features available in C++ (for instance when it comes to [retrieve Gravity Forces](https://simtk.org/plugins/phpBB/viewtopicPhpbb.php?f=91&t=15254&p=0&start=0&view=&sid=a0e31360639a2913b8ef9ac8db387005) and process them in a Python script).
+OpenSim is a great software for biomechanical simulation, and it's Python API helps greatly for quick prototyping of scientific applications. However, this Python wrapping doesn't include all the features available in C++ (for instance when it comes to [retrieve Gravity Forces](https://simtk.org/plugins/phpBB/viewtopicPhpbb.php?f=91&t=15254&p=0&start=0&view=&sid=a0e31360639a2913b8ef9ac8db387005) and process them in a Python script).
 
-The main goal is to write a C++ class (named **GravForcesProcessor**) and the associated SWIG-Python wrapped module in order to retrieve the forces and torques resulting from gravity at a given frame attached to a given body (for instance the elbow joint center) of a given model. The following snippet of fictional Python code illustrates how it should be used:
+The main goal of this project is to create a library and wrap it thanks to SWIG-Python into a Python module. A Python class named `GravForcesProcessor` may hence retrieve the forces and torques resulting from gravity at a given frame attached to a given body (for instance the elbow joint center) of a given OpenSim model. The following snippet of fictional Python code illustrates how it should be used:
 
     myGravProc = GravForcesProcessor(myModel)
-    torques, forces = myGravProc(myFrame)
+    torques, forces = myGravProc.getGravityForces(myFrame)
 
 Hence, this project includes 4 "parts":
-- the C++ implementation of the class **GravForcesProcessor**;
-- the C++ implementation of a CLI executable named **TestGravForcesProcessor** for C++ debugging. It comes with a simple OsimModel for development purpose;
+- the C++ implementation of the class `GravForcesProcessor`;
+- the C++ implementation of a CLI executable named `TestGravForcesProcessor` for C++ debugging. It comes with a simple OsimModel for development purpose;
 - the SWIG C++ -> Python wrapping;
 - the creation of the Python package from the SWIG wrapped code and the dynamic library.
 
-This project is currently only developed for Windows 10, using Visual Studio 2019, CMake 3.23, SWIG 4.0, Python 3.8 and OpenSim 4.4.
+This project is currently only developed for OpenSim 4.4 running on Windows 10. OpenSim 4.4. This imposes a development chain based on Visual Studio 2019 and Python 3.8. Project is built with CMake 3.30 and SWIG 4.0.
 
 NOTE this project is to be developped step by step. The first step to complete is simply to have a very simplistic feature being compiled, linked, executed and wrapped into Python using SWIG.
 
 ## Global architecture of the project
 ### C++ dynamic library and test application
 This part uses the following files:
-- *GravForcesProcessor.h* the header file;
-- *GravForcesProcessor.cpp* the source file that implements the GravForcesProcessor class;
-- *TestGravForcesProcessor.cpp* that implements the CLI develoment and test application;
-- a minimum OpenSim model (located in a subdirectory named Resources).
+- `GravForcesProcessor.h` the header file;
+- `GravForcesProcessor.cpp` the source file that implements the GravForcesProcessor class;
+- `TestGravForcesProcessor.cpp` that implements the CLI develoment and test application;
+- a minimum OpenSim model (located in a subdirectory named `Resources`).
 
 **NOTE:** to date, the file GravForcesProcessor.cpp implements only the minimum code to build the whole framework. I'd like to have it compile and link correctly to test all parts of the project before working on the core features.
 
