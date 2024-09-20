@@ -14,7 +14,7 @@
 // DEFINES
 //=============================================================================
 #define OSIM_ARM_MODEL      "./resources/test0.osim"
-#define TEST 10
+#define TEST 20
 
 int main()
 {
@@ -25,8 +25,8 @@ int main()
     // Create the GravForcesProcessor instance
     GravForcesProcessor myGravTest = GravForcesProcessor(TEST);
 //    spdlog::debug("Gravity Force Test: {}", myGravTest.getGravTorques());
-//    std::cout << "Gravity Force Test: " << myGravTest.getGravTorques() << std::endl;
+    std::cout << "Gravity Force Test with OpenSim include: " << myGravTest.getGravTorques() << std::endl;
 
 //    spdlog::debug("Done !");
-    std::cout << "Done !" << std::endl;
+    std::cout << "Done with OpenSim include!" << std::endl;
 }
